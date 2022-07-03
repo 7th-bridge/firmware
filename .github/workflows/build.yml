@@ -23,11 +23,13 @@ jobs:
         run: |
           git clone https://github.com/openwrt/openwrt.git
           cd ./openwrt
+          ls
           git checkout v21.02.3
           git status
 
-      # - name: update all feeds
-      #   run: ./scripts/feeds update -a
+      - name: update all feeds
+        run: ls
+        # ./scripts/feeds update -a
 
       # - name: install all feeds
       #   run: ./scripts/feeds install -a
