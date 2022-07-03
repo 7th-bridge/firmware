@@ -1,0 +1,33 @@
+name: build openwrt image
+
+# only triggerd Manually
+on: workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@main
+
+      - name: install dependencies
+        run: |
+          sudo apt -y install build-essential ccache ecj fastjar file g++ gawk \
+          gettext git java-propose-classpath libelf-dev libncurses5-dev \
+          libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \
+          python-distutils-extra python3-setuptools python3-dev rsync subversion \
+          swig time xsltproc zlib1g-dev 
+
+      - name: clone repo
+        run: pwd
+      #   git clone https://github.com/openwrt/openwrt.git
+
+      # - name: update all feeds
+      #   run: ./scripts/feeds update -a
+
+      # - name: install all feeds
+      #   run: ./scripts/feeds install -a
+
+      # - name: build firmware
+      #   run: make
