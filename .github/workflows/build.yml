@@ -13,15 +13,18 @@ jobs:
 
       - name: install dependencies
         run: |
-          sudo apt -y install build-essential ccache ecj fastjar file g++ gawk \
+          sudo apt-get -y install build-essential ccache ecj fastjar file g++ gawk \
           gettext git java-propose-classpath libelf-dev libncurses5-dev \
           libncursesw5-dev libssl-dev python python2.7-dev python3 unzip wget \
           python-distutils-extra python3-setuptools python3-dev rsync subversion \
-          swig time xsltproc zlib1g-dev 
+          swig time xsltproc zlib1g-dev
 
       - name: clone repo
-        run: pwd
-      #   git clone https://github.com/openwrt/openwrt.git
+        run: |
+          git clone https://github.com/openwrt/openwrt.git
+          cd ./openwrt
+          git checkout v21.02.3
+          git status
 
       # - name: update all feeds
       #   run: ./scripts/feeds update -a
