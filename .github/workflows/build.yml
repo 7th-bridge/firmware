@@ -22,6 +22,7 @@ jobs:
       - name: clone & checkout repo
         run: |
           git clone https://github.com/openwrt/openwrt.git
+          cd ./openwrt
           git checkout v21.02.3
 
       - name: update all feeds
