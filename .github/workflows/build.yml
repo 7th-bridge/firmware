@@ -19,20 +19,37 @@ jobs:
           python-distutils-extra python3-setuptools python3-dev rsync subversion \
           swig time xsltproc zlib1g-dev
 
-      - name: clone repo
+      - name: clone & checkout repo
         run: |
           git clone https://github.com/openwrt/openwrt.git
-          cd ./openwrt
-          ls
           git checkout v21.02.3
-          git status
 
       - name: update all feeds
-        run: ls
-        # ./scripts/feeds update -a
+        run: |
+          cd ./openwrt
+          ./scripts/feeds update -a
 
-      # - name: install all feeds
-      #   run: ./scripts/feeds install -a
+      - name: install all feeds
+        run: |
+          cd ./openwrt
+          ./scripts/feeds install -a
 
-      # - name: build firmware
-      #   run: make
+      - name: make configuration
+        run: cp .config ./openwrt
+
+      - name: download packages
+        run: |
+          cd ./openwrt
+          make download
+
+      - name: build firmware
+        run: |
+          cd ./openwrt
+          make
+
+      - name: determine image
+        run: |
+          if [-d "./openwrt/bin/targets/bcm27xx/bcm2708"]; then
+            cd ./openwrt/bin/targets/bcm27xx/bcm2708
+            ls
+          fi
