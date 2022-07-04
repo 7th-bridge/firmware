@@ -50,7 +50,10 @@ jobs:
 
       - name: determine image
         run: |
-          if [-d "./openwrt/bin/targets/bcm27xx/bcm2708"]; then
-            cd ./openwrt/bin/targets/bcm27xx/bcm2708
-            ls
-          fi
+          cd ./openwrt/bin/targets/bcm27xx/bcm2708
+          ls -al
+
+#          if [-d "./openwrt/bin/targets/bcm27xx/bcm2708"]; then
+#            cd ./openwrt/bin/targets/bcm27xx/bcm2708
+#            ls
+#          fi
