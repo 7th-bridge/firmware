@@ -47,11 +47,18 @@ jobs:
         run: |
           cd ./openwrt
           make
-
-      - name: determine image
+          
+      - name: download upload tool
         run: |
-          cd ./openwrt/bin/targets/bcm27xx/bcm2708
-          ls -al
+          mkdir tools
+          cd tools
+          curl -fsSL https://github.com/Mikubill/transfer/releases/download/v0.4.17/transfer_0.4.17_linux_amd64.tar.gz -o transfer.tar.gz
+          tar -xzf transfer.tar.gz
+          
+      - name: upload firmware to wetransfer
+        run: |
+          cd tools
+          ./transfer wet -s --no-progress ../openwrt/bin/targets/bcm27xx/bcm2708/openwrt-bcm27xx-bcm2708-rpi-ext4-factory.img.gz
 
 #          if [-d "./openwrt/bin/targets/bcm27xx/bcm2708"]; then
 #            cd ./openwrt/bin/targets/bcm27xx/bcm2708
